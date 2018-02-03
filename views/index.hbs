@@ -28,36 +28,19 @@
 </p>
 
 <ul class="list-group">
-  <button type="button" class="btn btn-success">Hospital 1 <span class="badge">7</span></button>
+  <button type="button" class="btn btn-success">Hospital 1 <span class="btn-badge">7</span></button>
 </ul>
 <pre>
 
 </pre>
 <ul class="list-group">
-  <button type="button" class="btn btn-danger">Hospital 2 <span class="badge">4</span></button>
+  <button type="button" class="btn btn-danger">Hospital 2 <span class="btn-badge">4</span></button>
 </ul>
 
 <body>
 <script name = "testScript">
-  var getJSON = function(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url, true);
-      xhr.responseType = 'json';
-      xhr.onload = function() {
-        var status = xhr.status;
-        if (status === 200) {
-          callback(null, xhr.response);
-        } else {
-          callback(status, xhr.response);
-        }
-      };
-      xhr.send();
-  };
-
   document.getElementById("button1").onclick = function(){
-    var json = getJSON("http://maps.googleapis.com/maps/api/geocode/json?address=queens", function(req, err){
-
-    });
+    alert("hey");
   }
 
 
