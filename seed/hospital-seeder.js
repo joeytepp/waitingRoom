@@ -4,8 +4,11 @@ var Hospital = require('../models/hospital');
 var fs = require('fs');
 var request = require('request');
 var sleep = require("system-sleep");
-var geocoder = require('geocoder');
+var geocoder = require('google-geocoder');
 
+var geo = geocoder({
+  key: 'AIzaSyAqJwYpuhL7K7sVhjsSp8sfA3QMBd2bpCU'
+});
 
 console.log("Starting...");
 fs.readFile('hospitalList.txt', 'utf8', function(err, data){
@@ -18,7 +21,6 @@ fs.readFile('hospitalList.txt', 'utf8', function(err, data){
       for(var i=0; i<list.length; i++){
         var lt = getLat(list[i]);
         var lg = getLng(list[i]);
-        sleep(500);
         //console.log(lt+ ", " + lg);
         dbo.collection("hospitals").insertOne(new Hospital({
         name: list[i],
@@ -38,28 +40,29 @@ fs.readFile('hospitalList.txt', 'utf8', function(err, data){
 });
 
 var getLat = function(key){
-  geocoder.geocode(key, function ( err, data ) {
-    // do something with data
+  geo.find(key, function(err, res){
     if(!err){
       try{
-        return data.results[0].geometry.location.lat;
+        return res[0].GeoPlace.location.lat;
       }catch(e){
-        console.log(data);
-        return null;
+        console.log(res);
       }
     }
+    // process response object
+
   });
 }
   var getLng = function(key){
-    geocoder.geocode(key, function ( err, data ) {
-      // do something with data
+    geo.find(key, function(err, res){
       if(!err){
         try{
-          return data.results[0].geometry.location.lng;
+          return res[0].GeoPlace.location.lng;
         }catch(e){
-          return null;
+          console.log(res);
         }
       }
+      // process response object
+
     });
   }
   /*var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + key+"&key=AIzaSyAqJwYpuhL7K7sVhjsSp8sfA3QMBd2bpCU";
