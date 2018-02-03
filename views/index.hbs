@@ -4,6 +4,7 @@
   <title>{{title}}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css" >
   <div class="page-header">
     <h1>{{title}}</h1>
   </div>
@@ -13,7 +14,7 @@
   </p>
 <div class="row">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder ="Location">
+      <input type="text" id = "textbox1"class="form-control" placeholder ="Location">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" id = "button1">Go!</button>
       </span>
@@ -26,22 +27,45 @@
 <p>
   Service options:
 </p>
+<div class = "test">
+<ul class="list-group">
+<button type="button" class="btn btn-success">
+  Hospital 1  <span class="badge badge-pill badge-light">7</span>
+</button>
+</ul>
 
 <ul class="list-group">
-  <button type="button" class="btn btn-success">Hospital 1 <span class="btn-badge">7</span></button>
+<button type="button" class="btn btn-primary">
+    Hospital 2  <span class="badge badge-pill badge-light">7</span>
+</button>
 </ul>
-<pre>
 
-</pre>
 <ul class="list-group">
-  <button type="button" class="btn btn-danger">Hospital 2 <span class="btn-badge">4</span></button>
+<button type="button" class="btn btn-danger">
+    Hospital 3  <span class="badge badge-pill badge-light">7</span>
+</button>
 </ul>
+</div>
 
 <body>
 <script name = "testScript">
   document.getElementById("button1").onclick = function(){
-    alert("hey");
-  }
+    document.getElementsByClassName("test")[0].style.visibility = "visible";
+    var text = document.getElementById("textbox1").value;
 
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            alert(xhr.responseText);
+        }
+    }
+    var thisUrl = document.URL;
+    console.log(thisUrl);
+    xhr.open("POST", thisUrl+'click', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        'test': text
+    }));
+  }
 
 </script>

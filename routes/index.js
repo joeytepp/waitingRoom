@@ -7,9 +7,16 @@ var request = require('request');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'WaitingRoom' });
 
-  var url = "http://developer.cumtd.com/api/v2.2/json/GetStop?" +
-    "key=d99803c970a04223998cabd90a741633" +
-    "&stop_id=it"
+
+
+});
+
+router.post('/click', function(req, res) {
+  var test = req.body.test
+
+
+  var url = "http://maps.googleapis.com/maps/api/geocode/json?address=hospital " + test;
+  console.log("url = "+url);
 
   request({
       url: url,
@@ -17,10 +24,16 @@ router.get('/', function(req, res, next) {
   }, function (error, response, body) {
 
       if (!error && response.statusCode === 200) {
-          console.log(body) // Print the json response
+          var results = body.results;
+          for(var i in results){
+            console.log(i);
+          }
+          //console.log(body.results) // Print the json response
       }
   });
+  console.log(test);
 
+  res.send(test);
 });
 
 
