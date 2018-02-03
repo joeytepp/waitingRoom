@@ -4,11 +4,8 @@ var Hospital = require('../models/hospital');
 var fs = require('fs');
 var request = require('request');
 
-var testHospital = new Hospital({
-  name: 'Hospital',
-  inLine: 0,
-  onTheWay: 0
-});
+var geocoder = require('geocoder');
+
 
 console.log("Starting...");
 fs.readFile('hospitalList.txt', 'utf8', function(err, data){
@@ -19,24 +16,52 @@ fs.readFile('hospitalList.txt', 'utf8', function(err, data){
     if (err) throw err;
     var dbo = db.db("hospitalData");
       for(var i=0; i<list.length; i++){
+        var lt = getLat(list[i]);
+        var lg = getLng(list[i]);
+        //console.log(lt+ ", " + lg);
         dbo.collection("hospitals").insertOne(new Hospital({
         name: list[i],
         inLine: 0,
-        onTheWay: 0
+        onTheWay: 0,
+        lat:lt, //getLat(list[i]),
+        lng:lg //getLng(list[i])
       }), function(err, res) {
         if (err) throw err;
         console.log("1 document inserted");
         db.close();
       });
-      getLat(list[i]);
+      //getLat(list[i]);
     }
 
   });
 });
 
 var getLat = function(key){
-  console.log("Trying for "+key);
-  var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + key;
+  geocoder.geocode(key, function ( err, data ) {
+    // do something with data
+    if(!err){
+      try{
+        return data.results[0].geometry.location.lat;
+      }catch(e){
+        return null;
+      }
+    }
+  });
+}
+  var getLng = function(key){
+    geocoder.geocode(key, function ( err, data ) {
+      // do something with data
+      if(!err){
+        try{
+          return data.results[0].geometry.location.lng;
+        }catch(e){
+          return null;
+        }
+      }
+    });
+  }
+  /*var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + key+"&key=AIzaSyAqJwYpuhL7K7sVhjsSp8sfA3QMBd2bpCU";
+  console.log(url);
   request({
       url: url,
       json: true
@@ -52,9 +77,4 @@ var getLat = function(key){
           //console.log(body.results) // Print the json response
       }
   });
-  return
-}
-
-var getLong = function(key){
-
-}
+  return*/
