@@ -66,10 +66,26 @@
 
 <body>
 <script name = "testScript">
+  var getJSON = function(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        var status = xhr.status;
+        if (status === 200) {
+          callback(null, xhr.response);
+        } else {
+          callback(status, xhr.response);
+        }
+      };
+      xhr.send();
+  };
+
   document.getElementById("button1").onclick = function(){
-    var json = $.getJSON('http://query.yahooapis.com/v1/public/yql?q=select%20%2a%20from%20yahoo.finance.quotes%20WHERE%20symbol%3D%27WRC%27&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback', function(data) {
-    //data is the JSON string
-    console.log(json);
-});
+    var json = getJSON("http://maps.googleapis.com/maps/api/geocode/json?address=queens", function(req, err){
+
+    });
   }
+
+
 </script>
