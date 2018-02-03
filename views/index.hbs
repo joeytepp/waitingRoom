@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
   <title>{{title}}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,8 +36,7 @@
 <body>
 <script name = "testScript">
   document.getElementById("button1").onclick = function(){
-    console.log('hello world');
-
-    alert('hello');
+    var json = JSON.parse("http://maps.googleapis.com/maps/api/geocode/json?address=queens");
+    console.log(json);
   }
 </script>
