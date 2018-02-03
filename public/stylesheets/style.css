@@ -1,12 +1,25 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: #00B7FF;
+}
+title{
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .test {
   visibility: hidden;
+}
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+/* Top right text */
+.top-right {
+    position: absolute;
+    top: 12px;
+    right: 32px;
 }
