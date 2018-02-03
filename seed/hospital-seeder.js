@@ -3,7 +3,7 @@ var url = "mongodb://localhost:27017/";
 var Hospital = require('../models/hospital');
 var fs = require('fs');
 var request = require('request');
-
+var sleep = require("system-sleep");
 var geocoder = require('geocoder');
 
 
@@ -18,6 +18,7 @@ fs.readFile('hospitalList.txt', 'utf8', function(err, data){
       for(var i=0; i<list.length; i++){
         var lt = getLat(list[i]);
         var lg = getLng(list[i]);
+        sleep(500);
         //console.log(lt+ ", " + lg);
         dbo.collection("hospitals").insertOne(new Hospital({
         name: list[i],
@@ -43,6 +44,7 @@ var getLat = function(key){
       try{
         return data.results[0].geometry.location.lat;
       }catch(e){
+        console.log(data);
         return null;
       }
     }
