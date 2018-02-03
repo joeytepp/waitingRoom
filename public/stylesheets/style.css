@@ -12,7 +12,32 @@ title{
 h1 {
   font: 100px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+h2 {
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+h3 {
+  font: 100px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: green;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+.button1 {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
 .test {
   visibility: hidden;
 }
@@ -26,56 +51,4 @@ h1 {
     position: absolute;
     top: 12px;
     right: 32px;
-}
-/* Popup container */
-.popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
 }
