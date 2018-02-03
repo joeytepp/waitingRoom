@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <head>
   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-  <title>{{title}}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css" >
     <div class = "container">
       <img src="images/Banner.png" style="width:100%;"/>
-      <div class ="top-right">{{title}}</div>
+      <div class ="top-right"><h1>WaitingRoom</h1></div>
     </div>
   </div>
 </head>
@@ -51,7 +50,9 @@
 </button>
 </ul>
 </div>
-
+<div class="popup" onclick="myFunction()">Click me!
+  <span class="popuptext" id="myPopup">Popup text...</span>
+</div>
 <body>
 <script name = "testScript">
   document.getElementById("button1").onclick = function(){
