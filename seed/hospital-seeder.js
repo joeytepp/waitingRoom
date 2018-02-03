@@ -1,3 +1,12 @@
-var mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
 
-mongoose.connect('localhost:271017/hospitals');
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("hospitalData");
+  dbo.createCollection("hospitals", function(err, res) {
+    if (err) throw err;
+    console.log("Collection created!");
+    db.close();
+  });
+});
