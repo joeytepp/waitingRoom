@@ -13,6 +13,7 @@
     "find-lat-lng": "^1.0.0",
     "fs": "0.0.1-security",
     "geocoder": "^0.2.3",
+    "geodist": "^0.2.1",
     "google-geocoder": "^0.2.1",
     "google-maps-api": "^2.0.1",
     "hbs": "~4.0.1",

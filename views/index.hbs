@@ -44,22 +44,10 @@
       Service options:
   </center>
 
-  <ul class="list-group">
-  <button id="myBtn" style="width:50%;" class="button button1"> Hospital 1  <span class="badge badge-pill badge-dark">7</span>
+  <!-- <ul class="list-group">
+  <button id="myBtn" class="button button1"> Hospital 1  <span class="badge badge-pill badge-dark">7</span>
   </button>
-  </ul>
-
-<!-- <ul class="list-group">
-  <button id="myBtn2" style="width:50%;" class="button button1">Hospital 2
-    <span class="badge badge-pill badge-dark">7</span>
-     onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="myBtn2"
-  </button>
-  </ul>
-
-  <ul class="list-group">
-  <button id="myBtn3" style="width:50%;" class="button button1">Hospital 3  <span padding = "10px" class="badge badge-pill badge-dark">7</span>
-  </button>
-</ul> -->
+  </ul> -->
 
   </div>
   <!-- The Modal -->
@@ -92,18 +80,35 @@ function initMap() {
   var input = document.getElementById('pac-input');
   var autocomplete = new google.maps.places.Autocomplete(input);
 }
+  function createButton(name){
+    for (var i=0;i<3;i++){
+    var ul = document.createElement('ul');
+    ul.setAttribute("class","list-group")
+    var btn =  document.createElement("Button");
+    btn.setAttribute("class","button button1");
+    var node = document.createTextNode(name);
+    btn.appendChild(node);
+    ul.appendChild(btn)
+    document.body.appendChild(ul);
+  }
+  }
   document.getElementById("button1").onclick = function(){
     document.getElementsByClassName("test")[0].style.visibility = "visible";
-    var text = document.getElementById("pac-card").value;
+    var text = document.getElementById("pac-input").value;
     var xhr = new XMLHttpRequest();
+
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log(xhr);
-            console.log("hello")
-        }
+
+      if (xhr.readyState == XMLHttpRequest.DONE) {
+          console.log(xhr.responseText);
+          var res = JSON.parse(xhr.responseText)
+          var name = res.name
+          console.log(res.name)
+          createButton(name)
+      }
     }
 
-    var thisUrl = document.URL;
+    var thisUrl = "https://3c9b6f4e.ngrok.io/";
     console.log(thisUrl);
     xhr.open("POST", thisUrl+'click', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -114,14 +119,14 @@ function initMap() {
   // Get the modal
 var modal= document.getElementById('myModal');
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+// var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
+// btn.onclick = function() {
+//     modal.style.display = "block";
+// }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -169,15 +174,6 @@ function showError(error) {
             x.innerHTML = "An unknown error occurred."
             break;
     }
-}
-function bigImg(x) {
-    x.style.height = "64px";
-    x.style.width = "64px";
-}
-
-function normalImg(x) {
-    x.style.height = "32px";
-    x.style.width = "32px";
 }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiJKNdm1r_N0HUAo9YLvbNNirrHJh9DuQ&libraries=places&callback=initMap"

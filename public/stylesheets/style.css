@@ -50,6 +50,8 @@ h3 {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
+    /* width:50%; */
+    margin:10px;
 }
 
 .button1 {
