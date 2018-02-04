@@ -104,13 +104,15 @@
       <p> Peak Hours: </p>
       <p> Physicians Currently Working: </p>
       <p> Distance: </p>
+
+      <p id="demo">Click below to see hospital location</p>
+
+      <button onclick="getLocation()">Locate hospital</button>
+
+      <div id="mapholder"></div>      
   </div>
 
 </div>
-
-<p id="demo">Click below to find nearby hospitals.</p>
-<button onclick="getLocation()">Locate hospitals</button>
-<div id="mapholder"></div>
 
 <script name = "testScript">
   document.getElementById("button1").onclick = function(){
@@ -155,6 +157,7 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
 var x = document.getElementById("demo");
 
 function getLocation() {
@@ -168,9 +171,11 @@ function getLocation() {
 function showPosition(position) {
     var latlon = position.coords.latitude + "," + position.coords.longitude;
     var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="
-    +latlon+"&zoom=14&size=400x300&key=AIzaSyAqJwYpuhL7K7sVhjsSp8sfA3QMBd2bpCU";
+    +latlon+"&zoom=14&size=400x300&key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU";
     document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
 }
+//To use this code on your website, get a free API key from Google.
+//Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
 function showError(error) {
     switch(error.code) {
@@ -188,6 +193,7 @@ function showError(error) {
             break;
     }
 }
+
 
 </script>
 </body>
