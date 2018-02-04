@@ -5,6 +5,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css" >
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
     <div class = "container">
       <img src="images/WaitingRoom.png" class = "image"/>
       <iframe src="http://free.timeanddate.com/clock/i63ij6l8/n1183/tlca/fs22/pct/ftb/tt0/tw1/tm1/ts1/tb4" frameborder="0" width="195" height="53" allowTransparency="true"></iframe>
@@ -17,79 +19,49 @@
   Enter your location below:
   </center>
 
+
     <div class="input-group">
-      <input type="text" align = "center" id = "textbox1" style="width:85%;" placeholder = "Location" name= "Location" autocomplete="off">
-      <span class="input-group-btn">
-      <button class="gobutton" type="button" id = "button1">Go!</button>
+    <div class = "center">
+    <!--  <input type="text" align = "center" id = "textbox1" style="width:85%;" placeholder = "Location" name= "Location" autocomplete="off"> -->
+      <div class="pac-card" id="pac-card">
+        <div id="pac-container">
+          <input id="pac-input" type="text"
+              placeholder="Enter a location">
+        </div>
+      </div><span class="input-group-btn">
+      <button class="gobutton" type="button" style="width:100%;" id = "button1">Go!</button>
       </span>
-</div><!-- /.row -->
-
-<style>
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
+      </div>
+      </div><!-- /.row -->
 </head>
 <body>
-
   <pre>
 
   </pre>
 
   <div class = "test">
-  <p>
+  <center>
       Service options:
-  </p>
+  </center>
+
   <ul class="list-group">
   <button id="myBtn" style="width:50%;" class="button button1"> Hospital 1  <span class="badge badge-pill badge-dark">7</span>
   </button>
   </ul>
 
-  <ul class="list-group">
-  <button id="myBtn2" style="width:50%;" class="button button1">Hospital 2  <span class="badge badge-pill badge-dark">7</span>
+<!-- <ul class="list-group">
+  <button id="myBtn2" style="width:50%;" class="button button1">Hospital 2
+    <span class="badge badge-pill badge-dark">7</span>
+     onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="myBtn2"
   </button>
   </ul>
 
   <ul class="list-group">
   <button id="myBtn3" style="width:50%;" class="button button1">Hospital 3  <span padding = "10px" class="badge badge-pill badge-dark">7</span>
   </button>
-  </ul>
+</ul> -->
 
+  </div>
   <!-- The Modal -->
   <div id="myModal" class="modal">
 
@@ -109,20 +81,25 @@
 
       <button onclick="getLocation()">Locate hospital</button>
 
-      <div id="mapholder"></div>      
+      <div id="mapholder"></div>
   </div>
 
 </div>
 
 <script name = "testScript">
+function initMap() {
+  var card = document.getElementById('pac-card');
+  var input = document.getElementById('pac-input');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+}
   document.getElementById("button1").onclick = function(){
     document.getElementsByClassName("test")[0].style.visibility = "visible";
-    var text = document.getElementById("textbox1").value;
-
+    var text = document.getElementById("pac-card").value;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
-            console.log(xhr.responseText);
+            console.log(xhr);
+            console.log("hello")
         }
     }
 
@@ -193,7 +170,16 @@ function showError(error) {
             break;
     }
 }
+function bigImg(x) {
+    x.style.height = "64px";
+    x.style.width = "64px";
+}
 
-
+function normalImg(x) {
+    x.style.height = "32px";
+    x.style.width = "32px";
+}
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiJKNdm1r_N0HUAo9YLvbNNirrHJh9DuQ&libraries=places&callback=initMap"
+    async defer></script>
 </body>
