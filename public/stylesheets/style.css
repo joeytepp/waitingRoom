@@ -1,4 +1,4 @@
-   body {
+body {
   padding: 50px;
   font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -69,6 +69,9 @@ margin-top: 0px;
 }
 .center {
     margin: auto;
-    width: 70%;
-    padding: 10px;
+}
+.gobutton
+{
+  padding-left: 20px;
+  padding-right: 20px;
 }
