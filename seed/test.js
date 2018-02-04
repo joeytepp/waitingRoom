@@ -6,9 +6,8 @@ var geo = geocoder({
 
 geo.find("Athabasca Healthcare Center", function(err, res){
   if(!err){
-    try{
-      return res[0].GeoPlace.location.lat;
-    }catch(e){
-      console.log(res);
-    }
+    console.log(res);
+  }else{
+    console.log(err);
   }
+});
