@@ -7,22 +7,21 @@
   <link rel="stylesheet" href="/stylesheets/style.css" >
     <div class = "container">
       <img src="images/WaitingRoom.png" class = "image"/>
+      <iframe src="http://free.timeanddate.com/clock/i63ij6l8/n1183/tlca/fs22/pct/ftb/tt0/tw1/tm1/ts1/tb4" frameborder="0" width="195" height="53" allowTransparency="true"></iframe>
     </div>
   </div>
 <pre>
 
 </pre>
-  <p>
-    Enter your location below:
-  </p>
-<div class="row">
+  <center>
+  Enter your location below:
+  </center>
+
     <div class="input-group">
-      <input type="text" id = "textbox1" class="input" placeholder ="Location">
+      <input type="text" id = "textbox1" style="width:97%;" align = "right" placeholder = "Location">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button" id = "button1">Go!</button>
+      <button class="btn btn-default" type="button" id = "button1">Go!</button>
       </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 
 <style>
@@ -71,26 +70,25 @@
   <pre>
 
   </pre>
-  <p>
-    Service options:
-  </p>
 
   <div class = "test">
+  <p>
+      Service options:
+  </p>
   <ul class="list-group">
-  <button id="myBtn" style="width:50%;" class="button button1"> Hospital 1  -<span class="badge badge-pill badge-dark">7</span>
+  <button id="myBtn" style="width:50%;" class="button button1"> Hospital 1  <span class="badge badge-pill badge-dark">7</span>
   </button>
   </ul>
 
   <ul class="list-group">
-  <button id="myBtn2" style="width:50%;" class="button button1">Hospital 2  -<span class="badge badge-pill badge-dark">7</span>
+  <button id="myBtn2" style="width:50%;" class="button button1">Hospital 2  <span class="badge badge-pill badge-dark">7</span>
   </button>
   </ul>
 
   <ul class="list-group">
-  <button id="myBtn3" style="width:50%;" class="button button1">Hospital 3  -<span class="badge badge-pill badge-dark">7</span>
+  <button id="myBtn3" style="width:50%;" class="button button1">Hospital 3  <span padding = "10px" class="badge badge-pill badge-dark">7</span>
   </button>
   </ul>
-  </div>
 
   <!-- The Modal -->
   <div id="myModal" class="modal">
@@ -110,10 +108,8 @@
 
 </div>
 
-<p id="demo">Click the button to get your position.</p>
-
-<button onclick="getLocation()">Try It</button>
-
+<p id="demo">Click below to find nearby hospitals.</p>
+<button onclick="getLocation()">Locate hospitals</button>
 <div id="mapholder"></div>
 
 <script name = "testScript">
