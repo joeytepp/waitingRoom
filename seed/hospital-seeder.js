@@ -5,13 +5,52 @@ var fs = require('fs');
 var request = require('request');
 var sleep = require("system-sleep");
 var geocoder = require('google-geocoder');
-
+var longitudes =[];
+var lattitudes = [];
 var geo = geocoder({
-  key: 'AIzaSyAqJwYpuhL7K7sVhjsSp8sfA3QMBd2bpCU'
+  key: 'AIzaSyCamXAiqu6dCyzYqJbYoe8BKKzkwCFZrfo'
 });
 
 console.log("Starting...");
 fs.readFile('hospitalList.txt', 'utf8', function(err, data){
+  if(err) throw err;
+  var aList = data.split("\r\n")
+  console.log(aList.length);
+
+  for(var i = 0; i<aList.length; i++){
+  //    console.log(i, aList[i]);
+      var hospital = aList[i];
+    geo.find(hospital, (function(h) { return function(err, res) {
+      console.log(h, res);
+      MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+          var dbo = db.db("hospitalData");
+            //console.log(lt+ ", " + lg);
+            //console.log(longitudes[i]+","+lattitudes[i]);
+            try{
+            dbo.collection("hospitals").insertOne(new Hospital({
+            name: h,
+            inLine: 0,
+            onTheWay: 0,
+            lat:res[0].location.lat, //getLat(list[i]),
+            lng:res[0].location.lng, //getLng(list[i])
+            address:res[0].formatted_address
+          }), function(err, res) {
+            if (err) throw err;
+            console.log("1 document inserted");
+            db.close();
+          });
+        }catch(e){console.log(h,i)}
+          //getLat(list[i]);
+
+      });
+    }; })(hospital))
+  }
+
+});
+
+
+/*fs.readFile('hospitalList.txt', 'utf8', function(err, data){
   if(err) throw err;
   //console.log(data);
   var list = data.split("\n");
@@ -19,15 +58,14 @@ fs.readFile('hospitalList.txt', 'utf8', function(err, data){
     if (err) throw err;
     var dbo = db.db("hospitalData");
       for(var i=0; i<list.length; i++){
-        var lt = getLat(list[i]);
-        var lg = getLng(list[i]);
         //console.log(lt+ ", " + lg);
+        //console.log(longitudes[i]+","+lattitudes[i]);
         dbo.collection("hospitals").insertOne(new Hospital({
         name: list[i],
         inLine: 0,
         onTheWay: 0,
-        lat:lt, //getLat(list[i]),
-        lng:lg //getLng(list[i])
+        lat:lattitudes[i], //getLat(list[i]),
+        lng:longitudes[i] //getLng(list[i])
       }), function(err, res) {
         if (err) throw err;
         console.log("1 document inserted");
@@ -43,9 +81,10 @@ var getLat = function(key){
   geo.find(key, function(err, res){
     if(!err){
       try{
-        return res[0].GeoPlace.location.lat;
+        return res[0].location.lat;
       }catch(e){
         console.log(res);
+        return null;
       }
     }
     // process response object
@@ -54,11 +93,13 @@ var getLat = function(key){
 }
   var getLng = function(key){
     geo.find(key, function(err, res){
+      console.log(res);
       if(!err){
         try{
-          return res[0].GeoPlace.location.lng;
+          return res[0].location.lng;
         }catch(e){
           console.log(res);
+          return null;
         }
       }
       // process response object
